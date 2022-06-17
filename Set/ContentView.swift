@@ -46,7 +46,13 @@ struct ContentView: View {
 struct CardView: View {
     let card: SetGame.Card
     var body: some View {
-        RoundedRectangle(cornerRadius: 20)
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: 20)
+            shape.fill().foregroundColor(.white)
+            shape.strokeBorder(lineWidth: 3)
+            Text(String(card.id)).font(.largeTitle)
+        }
+        
     }
 }
 
