@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-let cards = Set([0...10])
-
 struct ContentView: View {
+    
+    @ObservedObject var viewModel: SetGameVM
+    
     var body: some View {
         VStack {
             HStack {
@@ -21,8 +22,8 @@ struct ContentView: View {
             
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach((1...81), id: \.self) { _ in
-                        CardView().aspectRatio(2/3, contentMode: .fit)
+                    ForEach((viewModel.cards)) { card in
+                        CardView(card: card).aspectRatio(2/3, contentMode: .fit)
                     }
                 }
             }.padding(.horizontal)
@@ -43,6 +44,7 @@ struct ContentView: View {
 }
 
 struct CardView: View {
+    let card: SetGame.Card
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
     }
@@ -50,6 +52,7 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let game = SetGameVM()
+        ContentView(viewModel: game)
     }
 }
