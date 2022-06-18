@@ -20,6 +20,6 @@ class SetGameVM: ObservableObject {
     }
     
     var cards: Array<SetGame.Card> {
-        model.cards
+        model.deck
     }
 }

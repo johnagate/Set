@@ -9,22 +9,23 @@ import Foundation
 
 struct SetGame {
     // private(set)
-    var cards: Array<Card>
+    var deck: Array<Card>
     
     init() {
-        cards = Array<Card>()
+        deck = Array<Card>()
         var i: Int = 1
         for color in Color.allCases {
             for shape in Shape.allCases {
                 for opacity in Opacity.allCases {
                     for numShapes in 1...3 {
-                        cards.append(Card(id: i, color: color, shape: shape, opacity: opacity, numShapes: numShapes))
+                        deck.append(Card(id: i, color: color, shape: shape, opacity: opacity, numShapes: numShapes))
                         i += 1
                     }
                 }
             }
         }
-        cards = cards.shuffled()
+        deck = deck.shuffled()
+        deck = Array(deck[0...10])
     }
     
     struct Card: Identifiable {
@@ -38,7 +39,7 @@ struct SetGame {
     }
     
     enum Color: CaseIterable {
-        case black, silver, red
+        case purple, green, red
     }
     
     enum Shape: CaseIterable {
