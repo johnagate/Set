@@ -35,6 +35,16 @@ struct CardView: View {
             return 1
         }
     }
+    
+    var strokeColor: Color {
+        if card.isMatched {
+            return .black
+        } else if card.isSelected {
+            return .blue
+        } else {
+            return .gray
+        }
+    }
 
     
     var body: some View {
@@ -42,7 +52,8 @@ struct CardView: View {
             ZStack {
                 let cardShape = RoundedRectangle(cornerRadius: geometry.size.height * 0.15)
                 cardShape.fill().foregroundColor(.white)
-                cardShape.strokeBorder(lineWidth: geometry.size.height * 0.02)
+                cardShape.stroke(strokeColor, lineWidth: geometry.size.height * 0.02)
+                
                 
                 VStack {
                     ForEach(1...card.numShapes, id: \.self) { _ in
