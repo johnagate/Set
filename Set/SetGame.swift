@@ -25,7 +25,7 @@ struct SetGame {
             }
         }
         deck = deck.shuffled()
-        deck = Array(deck[0...10])
+        deck = Array(deck[0...11])
     }
     
     struct Card: Identifiable {
