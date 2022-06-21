@@ -8,6 +8,7 @@
 import SwiftUI
 
 class SetGameVM: ObservableObject {
+    typealias Card = SetGame.Card
     
     @Published private var model: SetGame
     
@@ -19,7 +20,15 @@ class SetGameVM: ObservableObject {
         return SetGame()
     }
     
-    var cards: Array<SetGame.Card> {
-        model.deck
+    var deltCards: Array<SetGame.Card> {
+        model.deltCards
+    }
+    
+    func choose(_ card: Card) {
+        model.choose(card)
+    }
+    
+    func newGame() {
+        model.newGame()
     }
 }

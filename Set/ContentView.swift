@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var viewModel: SetGameVM
+    @ObservedObject var game: SetGameVM
     
     var body: some View {
         VStack {
@@ -19,16 +19,14 @@ struct ContentView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
             }.padding(.horizontal)
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach((viewModel.cards)) { card in
-                        CardView(card: card).aspectRatio(2/3, contentMode: .fit)
-                    }
-                }.padding(.all, 3.0)
-            }.padding(.horizontal)
+            AspectVGrid(items: game.deltCards, aspectRatio: 2/3) { card in
+                CardView(card: card).padding(5).onTapGesture {
+                    game.choose(card)
+                }
+            }.padding(5)
             HStack {
                 Spacer()
-                Button(action: {print(viewModel.cards[0].numShapes)}) {
+                Button(action: {game.newGame()}) {
                     Text("New Game")
                 }
                 Spacer()
@@ -44,6 +42,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = SetGameVM()
-        ContentView(viewModel: game)
+        ContentView(game: game)
     }
 }
