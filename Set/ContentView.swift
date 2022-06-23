@@ -30,7 +30,7 @@ struct ContentView: View {
                     Text("New Game")
                 }
                 Spacer()
-                Button(action: {}) {
+                Button(action: {game.dealThree()}) {
                     Text("Deal Three")
                 }
                 Spacer()

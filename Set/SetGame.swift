@@ -27,7 +27,7 @@ struct SetGame {
         }
         deck = deck.shuffled()
         deltCards = Array(deck[0...11])
-        deck = Array(deck[12...81])
+        deck = Array(deck[12...80])
     }
     
     struct Card: Identifiable {
@@ -76,7 +76,16 @@ struct SetGame {
         }
         deck = deck.shuffled()
         deltCards = Array(deck[0...11])
-        deck = Array(deck[12...81])
+        deck = Array(deck[12...80])
+    }
+    
+    mutating func dealThree() {
+        if deck.count > 3 {
+            deltCards = deltCards + Array(deck[0...2])
+            deck = Array(deck[3...deck.count - 1])
+        } else if deck.count > 2 {
+            deltCards = deltCards + Array(deck[0...2])
+        }
     }
     
 }

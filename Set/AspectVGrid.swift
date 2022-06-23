@@ -5,6 +5,8 @@
 //  Created by john agate on 6/19/22.
 //
 
+//TODO: implement a minimum size likely usign max columsn in width that fits function
+
 import SwiftUI
 
 struct AspectVGrid<Item, ItemView>: View where ItemView: View, Item: Identifiable{
