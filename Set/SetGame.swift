@@ -85,6 +85,7 @@ struct SetGame {
             deck = Array(deck[3...deck.count - 1])
         } else if deck.count > 2 {
             deltCards = deltCards + Array(deck[0...2])
+            deck = []
         }
     }
     
