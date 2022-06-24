@@ -58,6 +58,11 @@ struct SetGame {
            !deltCards[chosenIndex].isMatched
         {
             deltCards[chosenIndex].isSelected = true
+        } else if let chosenIndex = deltCards.firstIndex(where: {$0.id == card.id}),
+            !deltCards[chosenIndex].isMatched,
+            deltCards[chosenIndex].isSelected
+        {
+            deltCards[chosenIndex].isSelected = false
         }
     }
     
