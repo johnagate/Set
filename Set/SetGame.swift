@@ -34,6 +34,7 @@ struct SetGame {
         var id: Int
         var isMatched: Bool = false
         var isSelected: Bool = false
+        var isNotMatched: Bool = false
         var color: Color
         var shape: Shape
         var opacity: Opacity

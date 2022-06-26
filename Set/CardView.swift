@@ -39,6 +39,8 @@ struct CardView: View {
     var strokeColor: Color {
         if card.isMatched {
             return .black
+        } else if card.isNotMatched {
+            return .red
         } else if card.isSelected {
             return .blue
         } else {
