@@ -11,6 +11,7 @@ struct SetGame {
     // private(set)
     private(set) var deck: Array<Card>
     private(set) var deltCards: Array<Card>
+    private var indecesOfSelectedCards: Array<Int> = []
     
     init() {
         deck = Array<Card>()
@@ -54,17 +55,35 @@ struct SetGame {
     }
     
     mutating func choose(_ card: Card) {
+        
         if let chosenIndex = deltCards.firstIndex(where: {$0.id == card.id}),
            !deltCards[chosenIndex].isSelected,
            !deltCards[chosenIndex].isMatched
         {
-            deltCards[chosenIndex].isSelected = true
+            if indecesOfSelectedCards.count < 2 {
+                deltCards[chosenIndex].isSelected = true
+                indecesOfSelectedCards.append(chosenIndex)
+            } else if indecesOfSelectedCards.count < 3 {
+                // matching logic
+                deltCards[chosenIndex].isSelected = true
+                indecesOfSelectedCards.append(chosenIndex)
+            } else {
+                // unmatching logic
+                for i in indecesOfSelectedCards {
+                    deltCards[i].isSelected = false
+                }
+                indecesOfSelectedCards = []
+                deltCards[chosenIndex].isSelected = true
+                indecesOfSelectedCards.append(chosenIndex)
+            }
+            
         } else if let chosenIndex = deltCards.firstIndex(where: {$0.id == card.id}),
             !deltCards[chosenIndex].isMatched,
             deltCards[chosenIndex].isSelected
         {
             deltCards[chosenIndex].isSelected = false
         }
+        print(indecesOfSelectedCards)
     }
     
     mutating func newGame() {
