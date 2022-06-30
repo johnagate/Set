@@ -31,7 +31,7 @@ struct SetGame {
         deck = Array(deck[12...80])
     }
     
-    struct Card: Identifiable {
+    struct Card: Identifiable, Equatable {
         var id: Int
         var isMatched: Bool = false
         var isSelected: Bool = false
@@ -64,9 +64,36 @@ struct SetGame {
                 deltCards[chosenIndex].isSelected = true
                 indecesOfSelectedCards.append(chosenIndex)
             } else if indecesOfSelectedCards.count < 3 {
-                // matching logic
                 deltCards[chosenIndex].isSelected = true
                 indecesOfSelectedCards.append(chosenIndex)
+                // matching logic
+                if
+                    //shape matching
+                    ((deltCards[indecesOfSelectedCards[0]].color == deltCards[indecesOfSelectedCards[1]].color &&
+                        deltCards[indecesOfSelectedCards[1]].color == deltCards[indecesOfSelectedCards[2]].color)
+                        || (deltCards[indecesOfSelectedCards[0]].color != deltCards[indecesOfSelectedCards[1]].color
+                            && deltCards[indecesOfSelectedCards[1]].color != deltCards[indecesOfSelectedCards[2]].color
+                            && deltCards[indecesOfSelectedCards[0]].color != deltCards[indecesOfSelectedCards[2]].color))
+                    && ((deltCards[indecesOfSelectedCards[0]].shape == deltCards[indecesOfSelectedCards[1]].shape &&
+                        deltCards[indecesOfSelectedCards[1]].shape == deltCards[indecesOfSelectedCards[2]].shape)
+                        || (deltCards[indecesOfSelectedCards[0]].shape != deltCards[indecesOfSelectedCards[1]].shape
+                            && deltCards[indecesOfSelectedCards[1]].shape != deltCards[indecesOfSelectedCards[2]].shape
+                            && deltCards[indecesOfSelectedCards[0]].shape != deltCards[indecesOfSelectedCards[2]].shape))
+                    && ((deltCards[indecesOfSelectedCards[0]].opacity == deltCards[indecesOfSelectedCards[1]].opacity &&
+                        deltCards[indecesOfSelectedCards[1]].opacity == deltCards[indecesOfSelectedCards[2]].opacity)
+                        || (deltCards[indecesOfSelectedCards[0]].opacity != deltCards[indecesOfSelectedCards[1]].opacity
+                            && deltCards[indecesOfSelectedCards[1]].opacity != deltCards[indecesOfSelectedCards[2]].opacity
+                            && deltCards[indecesOfSelectedCards[0]].opacity != deltCards[indecesOfSelectedCards[2]].opacity))
+                    && ((deltCards[indecesOfSelectedCards[0]].numShapes == deltCards[indecesOfSelectedCards[1]].numShapes &&
+                        deltCards[indecesOfSelectedCards[1]].numShapes == deltCards[indecesOfSelectedCards[2]].numShapes)
+                        || (deltCards[indecesOfSelectedCards[0]].numShapes != deltCards[indecesOfSelectedCards[1]].numShapes
+                            && deltCards[indecesOfSelectedCards[1]].numShapes != deltCards[indecesOfSelectedCards[2]].numShapes
+                            && deltCards[indecesOfSelectedCards[0]].numShapes != deltCards[indecesOfSelectedCards[2]].numShapes))
+                {
+                    deltCards[indecesOfSelectedCards[0]].isMatched = true
+                    deltCards[indecesOfSelectedCards[1]].isMatched = true
+                    deltCards[indecesOfSelectedCards[2]].isMatched = true
+                }
             } else {
                 // unmatching logic
                 for i in indecesOfSelectedCards {
